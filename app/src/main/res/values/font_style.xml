@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="normal_font" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- 전체 폰트 적용 -->
+        <item name="android:fontFamily">@font/one_mobile_pop</item>
+    </style>
+</resources>
