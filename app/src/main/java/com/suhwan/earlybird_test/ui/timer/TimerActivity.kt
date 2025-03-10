@@ -1,14 +1,22 @@
 package com.suhwan.earlybird_test.ui.timer
-
-import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.content.ServiceConnection
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.IBinder
+import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,8 +25,10 @@ import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityTimerBinding
 import com.suhwan.earlybird_test.ui.main.MainActivity
 
-class TimerActivity : AppCompatActivity(), TimerListener {
+
+class TimerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTimerBinding
+    private val ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 1
     private var isRunning = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,69 +37,47 @@ class TimerActivity : AppCompatActivity(), TimerListener {
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        TwoMinutesTimer.listener = this
-
         binding.btnStart.setOnClickListener {
-            if(isRunning == false){
-                if(binding.btnStart.text == getString(R.string.timer_btn_end)){
-                    intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-                else{
-                    isRunning = true
-                    startLockTask()
-                    FullScreenMode()
-                    TwoMinutesTimer.start()
-                    runOnUiThread {
-                        binding.btnStart.visibility = View.GONE
-                        binding.tvMinute.setTextColor(getColorStateList(R.color.timer_start_text))
-                        binding.tvSecond.setTextColor(getColorStateList(R.color.timer_start_text))
-                        binding.tvMillisecond.setTextColor(getColorStateList(R.color.timer_start_text))
-                    }
-                }
+            if(binding.btnStart.text == getString(R.string.timer_btn_start)){
+                isRunning = true
+                checkPermission()
+            }else{
+                isRunning = false
+                intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }
 
-    override fun onTick(millisUntilFinished: Long) {
-        val minutes = (millisUntilFinished / 1000) / 60 // 분
-        val seconds = (millisUntilFinished / 1000) % 60 // 초
-        val milliseconds = (millisUntilFinished % 1000) / 10 // 밀리초 (두 자리)
-
-        runOnUiThread{
-            binding.tvMinute.text = if (minutes<10) "0${minutes}" else "$minutes"
-            binding.tvSecond.text = if (seconds<10) ":0${seconds}" else ":$seconds"
-            binding.tvMillisecond.text = if (milliseconds<10) ":0${milliseconds}" else ":$milliseconds"
+    private fun checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {  // 마시멜로우 이상일 경우
+            if (!Settings.canDrawOverlays(this)) {  // 오버레이 권한 체크
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE)
+            } else {
+                val serviceIntent = Intent(this, TimerService::class.java)
+                startService(serviceIntent)
+            }
+        } else {
+            val serviceIntent = Intent(this, TimerService::class.java)
+            startService(serviceIntent)
         }
     }
-
-    override fun onFinish() {
-        isRunning = false
-        stopLockTask()
-        ShowNavBarOnly()
-        runOnUiThread{
-            binding.tvMinute.text = "02"
-            binding.tvSecond.text = ":00"
-            binding.tvMillisecond.text = ":00"
-            binding.btnStart.visibility = View.VISIBLE
-            binding.tvMinute.setTextColor(getColorStateList(R.color.black))
-            binding.tvSecond.setTextColor(getColorStateList(R.color.black))
-            binding.tvMillisecond.setTextColor(getColorStateList(R.color.black))
-            binding.tvMinute.visibility = View.INVISIBLE
-            binding.tvSecond.visibility = View.INVISIBLE
-            binding.tvMillisecond.visibility = View.INVISIBLE
-            binding.finishGood.visibility = View.VISIBLE
-            binding.btnStart.text = getString(R.string.timer_btn_end)
-            binding.imageView.setImageResource(R.drawable.icon_character_2)
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE) {
+            if (!Settings.canDrawOverlays(this)) {
+                // TODO 동의를 얻지 못했을 경우의 처리 (예: 사용자에게 다시 요청)
+            } else {
+                val serviceIntent = Intent(this, TimerService::class.java)
+                startService(serviceIntent)
+            }
         }
     }
-
-    override fun onBackPressed() {
-        if(isRunning == false){
-            super.onBackPressed()
-        }
-    }
-
     private fun FullScreenMode(){
         val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
         windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_DEFAULT
@@ -102,8 +90,9 @@ class TimerActivity : AppCompatActivity(), TimerListener {
             ViewCompat.onApplyWindowInsets(view, windowInsets)
         }
     }
-    private fun ShowNavBarOnly() {
-        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
-        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+    override fun onBackPressed() {
+        if(isRunning == false){
+            super.onBackPressed()
+        }
     }
 }

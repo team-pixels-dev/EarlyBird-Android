@@ -84,8 +84,7 @@ class ReservationActivity : AppCompatActivity() {
         }
 
         binding.btnBack.setOnClickListener{
-            intent = Intent(this, AddAlarmActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         
         binding.switchAlarmSound.setOnCheckedChangeListener { _, isChecked ->

@@ -8,7 +8,7 @@
     <color name="calendar_header">#E5E5E5</color>
     <color name="calendar_body_gray">#BDBDBD</color>
 
-    <color name="background">#80DBF0</color>
+    <color name="main_background">#00A2CB</color>
     <color name="sub_background">#36CAF0</color>
     <color name="Emphasis_background">#E5E5E5</color>
     <color name="shadow">#2F2460</color>
