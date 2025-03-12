@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         val intent = when(view.id){
             binding.button1.id -> Intent(this, TimerActivity::class.java)
             binding.button2.id -> Intent(this, AddAlarmActivity::class.java)
-//            binding.button2.id -> Intent(this, ReservationActivity::class.java)
             else -> null
         }
         intent?.let { startActivity(intent) }

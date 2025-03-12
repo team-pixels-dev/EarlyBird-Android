@@ -3,9 +3,9 @@
 
     <!--main_activity-->
     <string name="main_introduction">나는\n할 일을 미루지 않는\n사람이다</string>
-    <string name="main_title_1">지금 당장 시작하기</string>
-    <string name="main_title_1_introduction_1">자과감 방지 가능</string>
-    <string name="main_title_1_introduction_2">스트레스 감소</string>
+    <string name="main_title_1">지금 2분 집중 시작</string>
+    <string name="main_title_1_introduction_1">자과감 방지 가능 스트레스 감소</string>
+    <!--    <string name="main_title_1_introduction_2">스트레스 감소</string>-->
     <string name="main_title_2">할 일 추가하고 알림받기</string>
     <string name="main_title_2_introduction_1">좋은 성적받기 가능</string>
     <string name="main_title_2_introduction_2">지각 스트레스 해방</string>
@@ -25,11 +25,16 @@
     <string name="add_sat">Sat</string>
     <string name="add_sun">Sun</string>
 
-<!--reservation_activity-->
+    <!--reservation_activity-->
     <string name="reservation_title">할 일 추가</string>
     <string name="reservation_schedule_hint">할 일 입력은 9자까지</string>
     <string name="reservation_alarm_sound">알람음</string>
     <string name="reservation_vibration">진동</string>
     <string name="reservation_normal">기본</string>
+
+<!--splash_activity-->
+    <string name="splash_text_1">얼리버드<font color='#4C4C4C'>와 함께라면</font></string>
+    <string name="splash_text_2">시작이 어렵지 않아요</string>
+
 
 </resources>
