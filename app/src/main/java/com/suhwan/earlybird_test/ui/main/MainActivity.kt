@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityMainBinding
 import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
+import com.suhwan.earlybird_test.ui.nps.NpsDialogFragment
 import com.suhwan.earlybird_test.ui.reservation.ReservationActivity
 import com.suhwan.earlybird_test.ui.timer.TimerActivity
 
@@ -28,7 +29,11 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.button1.setOnClickListener(btn_listener)
-        binding.button2.setOnClickListener(btn_listener)
+//        binding.button2.setOnClickListener(btn_listener)
+        binding.button2.setOnClickListener {
+            val npsDialog = NpsDialogFragment()
+            npsDialog.show(supportFragmentManager,"NpsDialogFragment")
+        }
 
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

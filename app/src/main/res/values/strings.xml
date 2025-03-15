@@ -36,12 +36,13 @@
     <string name="splash_text_1">얼리버드<font color='#4C4C4C'>와 함께라면</font></string>
     <string name="splash_text_2">시작이 어렵지 않아요</string>
 
-<!--nps_activity-->
+    <!--nps_fragment-->
     <string name="nps_question">얼리버드를 주변에 얼마나\n추천하고 싶으신가요?</string>
     <string name="nps_no_recommend">추천 안해요</string>
     <string name="nps_yes_recommend">정말 추천해요</string>
     <string name="nps_submit">제출하기</string>
     <string name="nps_think">사용하면서 아쉬웠던 점이 있다면 적어주세요</string>
     <string name="nps_finish">완료하기</string>
+
 
 </resources>

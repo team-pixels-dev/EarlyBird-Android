@@ -13,4 +13,5 @@
     <color name="Emphasis_background">#E5E5E5</color>
     <color name="shadow">#2F2460</color>
     <color name="timer_start_text">#FF6666</color>
+    <color name="nps_btn_circle">#F7F7F7</color>
 </resources>
