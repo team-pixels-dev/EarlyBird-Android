@@ -1,20 +1,28 @@
 package com.suhwan.earlybird_test.ui.splash
-
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.gson.Gson
 import com.suhwan.earlybird_test.R
+import com.suhwan.earlybird_test.db.ClientManager
+import com.suhwan.earlybird_test.db.http.RetrofitClient
+import com.suhwan.earlybird_test.db.http.model.VisitRequest
 import com.suhwan.earlybird_test.ui.main.MainActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SplashPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        sendVisitEvent()
 
         Handler(Looper.getMainLooper()).postDelayed({
 
@@ -34,5 +42,23 @@ class SplashPageActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+    private fun sendVisitEvent(){
+        val uuid = ClientManager.getOrCreateUUID(this)
+        val client = VisitRequest(uuid)
+        RetrofitClient.visitInstance.visitRequest(client).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if(response.isSuccessful){
+                    Log.d("visit-event", uuid)
+                }
+                else{
+                    val error = response.errorBody()
+                    Log.d("visit-event", "error body : $error")
+                }
+            }
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d("visit-event", t.message.toString())
+            }
+        })
     }
 }

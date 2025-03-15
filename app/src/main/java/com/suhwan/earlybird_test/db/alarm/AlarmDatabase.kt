@@ -1,4 +1,4 @@
-package com.suhwan.earlybird_test.db
+package com.suhwan.earlybird_test.db.alarm
 
 import android.content.Context
 import androidx.room.Database
@@ -12,7 +12,7 @@ abstract class AlarmDatabase : RoomDatabase() {
         val databaseName = "db_todo"
         var alarmDatabase : AlarmDatabase? = null
 
-        fun getDatabase(context: Context): AlarmDatabase{
+        fun getDatabase(context: Context): AlarmDatabase {
             if(alarmDatabase == null){
                 alarmDatabase = Room.databaseBuilder(
                     context,

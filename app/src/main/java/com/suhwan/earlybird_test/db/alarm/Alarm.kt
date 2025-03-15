@@ -1,8 +1,7 @@
-package com.suhwan.earlybird_test.db
+package com.suhwan.earlybird_test.db.alarm
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDateTime
 
 @Entity(tableName = "alarm_table")
 data class Alarm(

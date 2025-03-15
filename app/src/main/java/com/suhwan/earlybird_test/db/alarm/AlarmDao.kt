@@ -1,4 +1,4 @@
-package com.suhwan.earlybird_test.db
+package com.suhwan.earlybird_test.db.alarm
 
 import androidx.room.Dao
 import androidx.room.Delete

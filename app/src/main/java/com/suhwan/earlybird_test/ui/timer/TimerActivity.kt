@@ -1,29 +1,28 @@
 package com.suhwan.earlybird_test.ui.timer
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.content.ServiceConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityTimerBinding
+import com.suhwan.earlybird_test.db.ClientManager
+import com.suhwan.earlybird_test.db.http.RetrofitClient
+import com.suhwan.earlybird_test.db.http.model.ClickRequest
 import com.suhwan.earlybird_test.ui.main.MainActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class TimerActivity : AppCompatActivity() {
@@ -39,6 +38,7 @@ class TimerActivity : AppCompatActivity() {
 
         binding.btnStart.setOnClickListener {
             if(binding.btnStart.text == getString(R.string.timer_btn_start)){
+                sendClickEvent()
                 isRunning = true
                 checkPermission()
             }else{
@@ -94,5 +94,30 @@ class TimerActivity : AppCompatActivity() {
         if(isRunning == false){
             super.onBackPressed()
         }
+    }
+    private fun sendClickEvent(){
+        val uuid = ClientManager.getOrCreateUUID(this)
+        val clickType = "timer-start-button-click"
+        val localDateTime: LocalDateTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val formatted = localDateTime.format(formatter)
+
+        val client = ClickRequest(uuid, clickType, formatted)
+        RetrofitClient.clickInstance.clickRequest(client).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if(response.isSuccessful){
+                    Log.d("click-event", uuid)
+                    Log.d("click-event", clickType)
+                    Log.d("click-event", formatted)
+                }
+                else{
+                    val error = response.errorBody()
+                    Log.d("click-event", "error body : $error")
+                }
+            }
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d("click-event", t.message.toString())
+            }
+        })
     }
 }
