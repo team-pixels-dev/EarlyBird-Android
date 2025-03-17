@@ -8,7 +8,7 @@
     tools:context=".ui.nps.NpsDialogFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="270dp"
-        android:layout_height="380dp">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -31,6 +31,11 @@
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </RadioGroup>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/nps_button_list"
             android:layout_width="match_parent"
@@ -40,11 +45,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_1"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -53,11 +60,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_2"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="1"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -66,11 +75,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/button_1"
                 app:layout_constraintStart_toEndOf="@+id/button_1" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_3"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="2"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -79,11 +90,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/button_2"
                 app:layout_constraintStart_toEndOf="@+id/button_2" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_4"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="3"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -92,11 +105,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/button_3"
                 app:layout_constraintStart_toEndOf="@+id/button_3" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_5"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="4"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -106,11 +121,13 @@
                 app:layout_constraintStart_toStartOf="@+id/button_1"
                 app:layout_constraintTop_toBottomOf="@+id/button_1" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_6"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="5"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -119,11 +136,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/button_5"
                 app:layout_constraintStart_toEndOf="@+id/button_5" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_7"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="6"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -132,11 +151,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/button_6"
                 app:layout_constraintStart_toEndOf="@+id/button_6" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_8"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="7"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -145,11 +166,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/button_7"
                 app:layout_constraintStart_toEndOf="@+id/button_7" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_9"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="8"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -159,11 +182,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintTop_toBottomOf="@+id/button_5"
                 app:layout_constraintStart_toStartOf="parent" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_10"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="9"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -172,11 +197,13 @@
                 android:stateListAnimator="@null"
                 app:layout_constraintBottom_toBottomOf="@+id/button_9"
                 app:layout_constraintStart_toEndOf="@+id/button_9" />
-            <androidx.appcompat.widget.AppCompatButton
+            <RadioButton
                 android:id="@+id/button_11"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/shape_button_nps_circle"
+                android:button="@null"
+                android:background="@drawable/shape_button_nps_circle_unselected"
+                android:textAlignment="center"
                 android:text="10"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -188,26 +215,32 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/nps_yes_recommend"
             android:textColor="@color/gray"
             android:textSize="12sp"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/nps_button_list"
             app:layout_constraintTop_toBottomOf="@+id/nps_button_list" />
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_gravity="bottom"
+            android:background="@color/nps_button"
+            android:stateListAnimator="@null"
             android:text="@string/nps_submit"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textSize="16sp"
-            android:stateListAnimator="@null"
-            android:background="@color/main_background"
+            android:textStyle="bold"
+            android:clickable="false"
+            android:layout_marginTop="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

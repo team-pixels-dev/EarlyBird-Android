@@ -7,6 +7,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="calendar_header">#E5E5E5</color>
     <color name="calendar_body_gray">#BDBDBD</color>
+    <color name="nps_button">#A7A7A7</color>
 
     <color name="main_background">#00A2CB</color>
     <color name="sub_background">#36CAF0</color>

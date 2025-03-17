@@ -18,4 +18,7 @@ object RetrofitClient {
     val clickInstance: ClickApiService by lazy {
         retrofit.create(ClickApiService::class.java)
     }
+    val npsScoreInstance: NpsScoreApiService by lazy {
+        retrofit.create(NpsScoreApiService::class.java)
+    }
 }
