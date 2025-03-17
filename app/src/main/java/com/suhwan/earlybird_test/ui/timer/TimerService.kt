@@ -9,18 +9,16 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
-import android.os.Binder
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.ImageButton
 import androidx.core.app.NotificationCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ViewInTimerServiceBinding
@@ -29,7 +27,6 @@ import com.suhwan.earlybird_test.ui.main.MainActivity
 class TimerService : Service(), TimerListener{
     private var binding: ViewInTimerServiceBinding? = null
     private var wm: WindowManager? = null
-    private var overlayView: View? = null
     private val handler = Handler(Looper.getMainLooper())
 
     private val SERVICE_ID = 1
@@ -37,8 +34,8 @@ class TimerService : Service(), TimerListener{
 
     override fun onBind(intent: Intent?): IBinder?{
       return null
-
     }
+
     override fun onCreate() {
         super.onCreate()
         TwoMinutesTimer.listener = this
@@ -68,6 +65,9 @@ class TimerService : Service(), TimerListener{
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
             startActivity(intent)
+            val message = Message.obtain()
+            message.what = 1
+            MainActivity.handler?.sendMessage(message)
             stopSelf()
         }
     }

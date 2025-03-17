@@ -1,9 +1,7 @@
 package com.suhwan.earlybird_test.ui.nps
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +9,10 @@ import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.suhwan.earlybird_test.R
-import com.suhwan.earlybird_test.databinding.FragmentNpsBinding
+import com.suhwan.earlybird_test.databinding.FragmentNpsScoreBinding
 import com.suhwan.earlybird_test.db.ClientManager
 import com.suhwan.earlybird_test.db.http.RetrofitClient
 import com.suhwan.earlybird_test.db.http.model.NpsScoreRequest
-import com.suhwan.earlybird_test.db.http.model.VisitRequest
-import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
-import com.suhwan.earlybird_test.ui.timer.TimerActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,11 +24,11 @@ import java.time.format.DateTimeFormatter
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class NpsDialogFragment : DialogFragment() {
+class NpsScoreDialogFragment : DialogFragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var binding: FragmentNpsBinding
+    private lateinit var binding: FragmentNpsScoreBinding
     private var selectedButton: RadioButton? = null
     private var selectedScore: Int = -1
 
@@ -49,7 +44,7 @@ class NpsDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNpsBinding.inflate(inflater)
+        binding = FragmentNpsScoreBinding.inflate(inflater)
         return binding.root
     }
 
@@ -121,7 +116,7 @@ class NpsDialogFragment : DialogFragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            NpsDialogFragment().apply {
+            NpsScoreDialogFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
