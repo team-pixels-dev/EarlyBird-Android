@@ -8,7 +8,7 @@ object TwoMinutesTimer {
     var listener: TimerListener ?= null
     fun start() {
         timer?.cancel()
-        timer = object : CountDownTimer(1200, 1){
+        timer = object : CountDownTimer(120000, 1){
             override fun onTick(millisUntilFinished: Long) {
                 listener?.onTick(millisUntilFinished)
             }

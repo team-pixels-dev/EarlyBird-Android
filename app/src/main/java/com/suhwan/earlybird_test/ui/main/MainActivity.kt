@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             ClientManager.setTimerFinish(this)
             val nowDate = ClientManager.setAndGetVisitDays(this)
             Log.d("nps-event","$nowDate 일 번째 접속했습니다.")
-            if(nowDate==1 || nowDate==3 || nowDate ==7 || nowDate == -1){
+            if(nowDate==1 || nowDate==3 || nowDate ==7){
                 val npsDialog = NpsScoreDialogFragment()
                 npsDialog.show(supportFragmentManager,"NpsScoreDialogFragment")
             }
