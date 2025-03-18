@@ -22,6 +22,7 @@ import android.view.WindowManager
 import androidx.core.app.NotificationCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ViewInTimerServiceBinding
+import com.suhwan.earlybird_test.db.ClientManager
 import com.suhwan.earlybird_test.ui.main.MainActivity
 
 class TimerService : Service(), TimerListener{
@@ -65,9 +66,9 @@ class TimerService : Service(), TimerListener{
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
             startActivity(intent)
-            val message = Message.obtain()
-            message.what = 1
-            MainActivity.handler?.sendMessage(message)
+
+            ClientManager.setTimerFinish(this)
+
             stopSelf()
         }
     }

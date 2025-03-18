@@ -1,5 +1,6 @@
 package com.suhwan.earlybird_test.db.http
 
+import com.suhwan.earlybird_test.db.http.model.NpsCommentRequest
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -20,5 +21,8 @@ object RetrofitClient {
     }
     val npsScoreInstance: NpsScoreApiService by lazy {
         retrofit.create(NpsScoreApiService::class.java)
+    }
+    val npsCommentInstance: NpsCommentApiService by lazy {
+        retrofit.create(NpsCommentApiService::class.java)
     }
 }

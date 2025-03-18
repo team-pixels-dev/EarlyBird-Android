@@ -2,7 +2,7 @@
     <string name="app_name">EarlyBird_Test</string>
 
     <!--main_activity-->
-    <string name="main_introduction">나는\n할 일을 미루지 않는\n사람이다</string>
+    <string name="main_introduction">나는\n<b>할 일을 미루지 않는</b>\n사람이다</string>
     <string name="main_title_1">지금 2분 집중 시작</string>
     <string name="main_title_1_introduction_1">자과감 방지 가능 스트레스 감소</string>
     <!--    <string name="main_title_1_introduction_2">스트레스 감소</string>-->

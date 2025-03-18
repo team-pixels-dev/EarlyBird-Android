@@ -1,6 +1,7 @@
 package com.suhwan.earlybird_test.ui.nps
 
 import android.os.Bundle
+import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.suhwan.earlybird_test.databinding.FragmentNpsScoreBinding
 import com.suhwan.earlybird_test.db.ClientManager
 import com.suhwan.earlybird_test.db.http.RetrofitClient
 import com.suhwan.earlybird_test.db.http.model.NpsScoreRequest
+import com.suhwan.earlybird_test.ui.main.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,12 +23,8 @@ import java.time.format.DateTimeFormatter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class NpsScoreDialogFragment : DialogFragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
     private lateinit var binding: FragmentNpsScoreBinding
     private var selectedButton: RadioButton? = null
@@ -34,10 +32,6 @@ class NpsScoreDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -79,13 +73,18 @@ class NpsScoreDialogFragment : DialogFragment() {
                 button.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 button.setBackgroundResource(R.drawable.shape_button_nps_circle_selected)
                 binding.submitButton.setBackgroundResource(R.color.main_background)
-                binding.submitButton.isClickable = true
+                binding.submitButton.isEnabled = true
 
                 selectedScore = score
             }
         }
         binding.submitButton.setOnClickListener {
             sendScoreEvent()
+
+            val message = Message.obtain()
+            message.what = 1
+            MainActivity.handler?.sendMessage(message)
+
             dismiss()
             parentFragmentManager.popBackStack()
         }
@@ -95,8 +94,8 @@ class NpsScoreDialogFragment : DialogFragment() {
         val localDateTime: LocalDateTime = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         val formatted = localDateTime.format(formatter)
-
-        val client = NpsScoreRequest(selectedScore, uuid, formatted, 1)
+        val days = ClientManager.getVisitDays(requireContext())
+        val client = NpsScoreRequest(selectedScore, uuid, formatted, days)
         RetrofitClient.npsScoreInstance.npsScoreRequest(client).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if(response.isSuccessful){
@@ -117,10 +116,7 @@ class NpsScoreDialogFragment : DialogFragment() {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             NpsScoreDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
             }
     }
 }

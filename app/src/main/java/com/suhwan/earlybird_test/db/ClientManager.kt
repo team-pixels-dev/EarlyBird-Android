@@ -9,7 +9,33 @@ object ClientManager {
     private const val PREFS_NAME = "earlyBird_prefs" //SharedPreferences 파일 이름
     private const val KEY_UUID = "client_uuid" //저장할 때 사용하는 키
 
+    fun setTimerFinish(context: Context){
+        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+        var finished = sharedPreferences.getInt("timer_finish",0)
+
+        if(finished == 0){
+            finished = 1;
+        }else{
+            finished = 0;
+        }
+        sharedPreferences.edit().putInt("timer_finish", finished).apply()
+    }
+    fun getTimerFinish(context: Context): Int{
+        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+        var finished = sharedPreferences.getInt("timer_finish",0)
+
+        return finished
+    }
+
     fun getVisitDays(context: Context): Int{
+        val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val visitDays = sharedPreferences.getInt("visit_days",0)
+        return visitDays
+    }
+
+    fun setAndGetVisitDays(context: Context): Int{
         val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
         val nowDate: LocalDateTime = LocalDateTime.now()
