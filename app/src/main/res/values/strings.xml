@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EarlyBird_Test</string>
+    <string name="app_name">얼리버드</string>
 
     <!--main_activity-->
     <string name="main_introduction">나는\n<b>할 일을 미루지 않는</b>\n사람이다</string>
