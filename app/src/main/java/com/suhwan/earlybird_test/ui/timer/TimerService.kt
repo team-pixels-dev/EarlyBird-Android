@@ -88,8 +88,8 @@ class TimerService : Service(), TimerListener{
         val milliseconds = (millisUntilFinished % 1000) / 10 // 밀리초 (두 자리)
         handler.post{
             binding?.tvMinute?.text = String.format("%02d", minutes)
-            binding?.tvSecond?.text = String.format(":%02d", seconds)
-            binding?.tvMillisecond?.text = String.format(".%02d", milliseconds)
+            binding?.tvSecond?.text = String.format(":%02d.", seconds)
+            binding?.tvMillisecond?.text = String.format("%02d", milliseconds)
         }
 
     }
@@ -121,7 +121,7 @@ class TimerService : Service(), TimerListener{
             binding?.tvMillisecond?.visibility = View.INVISIBLE
             binding?.finishGood?.visibility = View.VISIBLE
             binding?.btnEnd?.visibility = View.VISIBLE
-            binding?.imageView?.setImageResource(R.drawable.icon_character_2)
+            binding?.imageView?.setImageResource(R.drawable.icon_timer_character_3)
         }
     }
 
@@ -140,7 +140,7 @@ class TimerService : Service(), TimerListener{
         return NotificationCompat.Builder(this, channelId)
             .setContentTitle("2분 타이머")
             .setContentText(content)
-            .setSmallIcon(R.drawable.icon_character_1)
+            .setSmallIcon(R.drawable.icon_timer_character_2)
             .setContentIntent(pendingIntent)
             .setOngoing(true)
             .build()
