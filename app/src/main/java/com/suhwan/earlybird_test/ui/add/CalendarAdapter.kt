@@ -1,12 +1,10 @@
 package com.suhwan.earlybird_test.ui.add
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.suhwan.earlybird_test.databinding.ItemCalendarBinding
-import com.suhwan.earlybird_test.db.Alarm
+import com.suhwan.earlybird_test.db.alarm.Alarm
 
 class CalendarAdapter(private val alarmList: ArrayList<Alarm>) :
     RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {

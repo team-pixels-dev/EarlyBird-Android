@@ -2,7 +2,6 @@ package com.suhwan.earlybird_test.ui.reservation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +13,9 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityReservationBinding
-import com.suhwan.earlybird_test.db.Alarm
-import com.suhwan.earlybird_test.db.AlarmDao
-import com.suhwan.earlybird_test.db.AlarmDatabase
+import com.suhwan.earlybird_test.db.alarm.Alarm
+import com.suhwan.earlybird_test.db.alarm.AlarmDao
+import com.suhwan.earlybird_test.db.alarm.AlarmDatabase
 import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
 
 class ReservationActivity : AppCompatActivity() {
@@ -84,8 +83,7 @@ class ReservationActivity : AppCompatActivity() {
         }
 
         binding.btnBack.setOnClickListener{
-            intent = Intent(this, AddAlarmActivity::class.java)
-            startActivity(intent)
+            finish()
         }
         
         binding.switchAlarmSound.setOnCheckedChangeListener { _, isChecked ->

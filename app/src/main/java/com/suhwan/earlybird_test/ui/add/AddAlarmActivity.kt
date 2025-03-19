@@ -2,19 +2,17 @@ package com.suhwan.earlybird_test.ui.add
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityAddAlarmBinding
-import com.suhwan.earlybird_test.db.Alarm
-import com.suhwan.earlybird_test.db.AlarmDao
-import com.suhwan.earlybird_test.db.AlarmDatabase
+import com.suhwan.earlybird_test.db.alarm.Alarm
+import com.suhwan.earlybird_test.db.alarm.AlarmDao
+import com.suhwan.earlybird_test.db.alarm.AlarmDatabase
 import com.suhwan.earlybird_test.ui.reservation.ReservationActivity
 
 class AddAlarmActivity : AppCompatActivity() {
