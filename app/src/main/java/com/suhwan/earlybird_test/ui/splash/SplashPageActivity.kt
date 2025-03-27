@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -51,23 +52,18 @@ class SplashPageActivity : AppCompatActivity() {
     private fun sendVisitEvent(){
         val uuid = ClientManager.getOrCreateUUID(this)
         val client = VisitRequest(uuid)
-        try {
-            RetrofitClient.visitInstance.visitRequest(client).enqueue(object : Callback<Void> {
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    if(response.isSuccessful){
-                        Log.d("visit-event", "success")
-                    }
-                    else{
-                        Log.d("visit-event", "error : 실패")
-                    }
+        RetrofitClient.visitInstance.visitRequest(client).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if(response.isSuccessful){
+                    Log.d("visit-event", "success")
                 }
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Log.d("visit-event", t.message.toString())
+                else{
+                    Log.d("visit-event", "error : 실패")
                 }
-            })
-        }catch (e:Exception){
-            Toast.makeText(this, "${e.message}",Toast.LENGTH_LONG).show()
-        }
-
+            }
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d("visit-event", t.message.toString())
+            }
+        })
     }
 }
