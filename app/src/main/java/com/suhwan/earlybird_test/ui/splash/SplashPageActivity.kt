@@ -1,9 +1,13 @@
 package com.suhwan.earlybird_test.ui.splash
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,6 +26,7 @@ class SplashPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         sendVisitEvent()
 
         Handler(Looper.getMainLooper()).postDelayed({
@@ -46,19 +51,23 @@ class SplashPageActivity : AppCompatActivity() {
     private fun sendVisitEvent(){
         val uuid = ClientManager.getOrCreateUUID(this)
         val client = VisitRequest(uuid)
-        RetrofitClient.visitInstance.visitRequest(client).enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if(response.isSuccessful){
-                    Log.d("visit-event", uuid)
+        try {
+            RetrofitClient.visitInstance.visitRequest(client).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if(response.isSuccessful){
+                        Log.d("visit-event", "success")
+                    }
+                    else{
+                        Log.d("visit-event", "error : 실패")
+                    }
                 }
-                else{
-                    val error = response.errorBody()
-                    Log.d("visit-event", "error body : $error")
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.d("visit-event", t.message.toString())
                 }
-            }
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.d("visit-event", t.message.toString())
-            }
-        })
+            })
+        }catch (e:Exception){
+            Toast.makeText(this, "${e.message}",Toast.LENGTH_LONG).show()
+        }
+
     }
 }

@@ -38,9 +38,9 @@ class TimerActivity : AppCompatActivity() {
 
         binding.btnStart.setOnClickListener {
             if(binding.btnStart.text == getString(R.string.timer_btn_start)){
+                checkPermission()
                 sendClickEvent()
                 isRunning = true
-                checkPermission()
             }else{
                 isRunning = false
                 intent = Intent(this, MainActivity::class.java)
