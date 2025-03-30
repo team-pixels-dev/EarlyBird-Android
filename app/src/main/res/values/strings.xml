@@ -45,7 +45,14 @@
     <string name="nps_finish">완료하기</string>
 
     <!--nps_comment_fragment-->
-    <string name="hint">서비스에 대한 피드백을 300자 이내로 작성해주세요.</string>
+    <string name="nps_comment_hint">서비스에 대한 피드백을 300자 이내로 작성해주세요.</string>
+
+    <!--nps_pay_fragment-->
+    <string name="nps_pay_question">얼리버드를 월 1,900~5,900원으로\n결제해서 사용할 의향이 있으신가요?</string>
+    <string name="nps_pay_comment">현재 기능 만으로 구독 결제를 하실지 궁금해요!\n솔직한 의견을 알려주세요!</string>
+    <string name="nps_pay_yes">네, 결제할 의향이 있어요!</string>
+    <string name="nps_pay_middle">더 많은 기능이 필요해요</string>
+    <string name="nps_pay_no">아니요, 괜찮아요</string>
 
 
 </resources>
