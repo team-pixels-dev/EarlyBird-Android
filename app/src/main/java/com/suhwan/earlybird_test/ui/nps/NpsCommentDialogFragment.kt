@@ -50,7 +50,7 @@ class NpsCommentDialogFragment : DialogFragment() {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if(p0.isNullOrBlank()){
-                    binding.submitButton.setBackgroundResource(R.color.nps_button)
+                    binding.submitButton.setBackgroundResource(R.color.submit_pop_up)
                 }else{
                     binding.submitButton.setBackgroundResource(R.color.main_background)
                 }

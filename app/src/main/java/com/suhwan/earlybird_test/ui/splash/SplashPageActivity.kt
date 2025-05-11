@@ -1,10 +1,15 @@
 package com.suhwan.earlybird_test.ui.splash
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,6 +27,7 @@ class SplashPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         sendVisitEvent()
 
         Handler(Looper.getMainLooper()).postDelayed({
@@ -49,11 +55,10 @@ class SplashPageActivity : AppCompatActivity() {
         RetrofitClient.visitInstance.visitRequest(client).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if(response.isSuccessful){
-                    Log.d("visit-event", uuid)
+                    Log.d("visit-event", "success")
                 }
                 else{
-                    val error = response.errorBody()
-                    Log.d("visit-event", "error body : $error")
+                    Log.d("visit-event", "error : 실패")
                 }
             }
             override fun onFailure(call: Call<Void>, t: Throwable) {

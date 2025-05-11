@@ -2,18 +2,18 @@
     <string name="app_name">얼리버드</string>
 
     <!--main_activity-->
-    <string name="main_introduction">나는\n<b>할 일을 미루지 않는</b>\n사람이다</string>
-    <string name="main_title_1">지금 2분 집중 시작</string>
-    <string name="main_title_1_introduction_1">자과감 방지 가능 스트레스 감소</string>
+    <string name="main_introduction">I am a person\n<b>who gets things done</b>\non time</string>
+    <string name="main_title_1">Get started now!</string>
+    <string name="main_title_1_introduction_1">Helps avoid feelings of self-blame\nReduces stress</string>
     <!--    <string name="main_title_1_introduction_2">스트레스 감소</string>-->
     <string name="main_title_2">할 일 추가하고 알림받기</string>
     <string name="main_title_2_introduction_1">좋은 성적받기 가능</string>
     <string name="main_title_2_introduction_2">지각 스트레스 해방</string>
 
     <!--timer_activity-->
-    <string name="timer_btn_start">시작!</string>
-    <string name="timer_btn_end">완료</string>
-    <string name="timer_finish_good">얼리버드와 함께라면\n혼자선 어려운 일도\n쉽게 시작할 수 있어요!</string>
+    <string name="timer_btn_start">Start!</string>
+    <string name="timer_btn_end">Task completed!</string>
+    <string name="timer_finish_good">With EarlyBird,\ngetting started is easy!</string>
 
     <!--addAlarm_activity-->
     <string name="add_non_added_ment">나중에 할 일 추가하고 알림 받기</string>
@@ -33,19 +33,26 @@
     <string name="reservation_normal">기본</string>
 
     <!--splash_activity-->
-    <string name="splash_text_1">얼리버드<font color='#4C4C4C'>와 함께라면</font></string>
-    <string name="splash_text_2">시작이 어렵지 않아요</string>
+    <string name="splash_text_1"><font color='#4C4C4C'>With</font> EarlyBird<font color='#4C4C4C'>,</font></string>
+    <string name="splash_text_2">getting started is easy</string>
 
     <!--nps_score_fragment-->
-    <string name="nps_question">얼리버드를 주변에 얼마나\n추천하고 싶으신가요?</string>
-    <string name="nps_no_recommend">추천 안해요</string>
-    <string name="nps_yes_recommend">정말 추천해요</string>
-    <string name="nps_submit">제출하기</string>
+    <string name="nps_question">How likely to\nrecommend EarlyBird?</string>
+    <string name="nps_no_recommend">Wouldn\'t recommend</string>
+    <string name="nps_yes_recommend">Highly recommend</string>
+    <string name="nps_submit">Submit</string>
     <string name="nps_think">사용하면서 아쉬웠던 점이 있다면 적어주세요</string>
     <string name="nps_finish">완료하기</string>
 
     <!--nps_comment_fragment-->
-    <string name="hint">서비스에 대한 피드백을 300자 이내로 작성해주세요.</string>
+    <string name="nps_comment_hint">Please leave your feedback on the service in 300 characters or less.</string>
+
+    <!--nps_pay_fragment-->
+    <string name="nps_pay_question">Would you be willing to\nsubscribe to EarlyBird for\n<b>$1.90~$5.90</b> per month?</string>
+    <string name="nps_pay_comment">We\'d love to know if you\'d subscribe\nbased on the current feature alone!</string>
+    <string name="nps_pay_yes">Yes, I\'d be willing to subscribe!</string>
+    <string name="nps_pay_middle">I need more features.</string>
+    <string name="nps_pay_no">No, I\'m good.</string>
 
 
 </resources>
