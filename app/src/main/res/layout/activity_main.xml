@@ -89,6 +89,7 @@
             android:text="@string/main_title_1_introduction_1"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/box_1"
             app:layout_constraintTop_toTopOf="parent" />
