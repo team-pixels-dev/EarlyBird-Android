@@ -54,4 +54,5 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation("androidx.core:core-ktx:1.16.0")
 }
