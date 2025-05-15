@@ -16,6 +16,7 @@ import com.suhwan.earlybird_test.db.ClientManager
 import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
 import com.suhwan.earlybird_test.ui.nps.NpsCommentDialogFragment
 import com.suhwan.earlybird_test.ui.nps.NpsScoreDialogFragment
+import com.suhwan.earlybird_test.ui.reservation.ReservationActivity
 import com.suhwan.earlybird_test.ui.timer.TimerActivity
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     val btn_listener = View.OnClickListener { view ->
         val intent = when(view.id){
             binding.button1.id -> Intent(this, TimerActivity::class.java)
-            binding.button2.id -> Intent(this, AddAlarmActivity::class.java)
+            binding.button2.id -> Intent(this, ReservationActivity::class.java)
             else -> null
         }
         intent?.let { startActivity(intent) }

@@ -107,7 +107,6 @@
         android:paddingTop="21dp"
         android:paddingBottom="21dp"
         android:paddingEnd="17dp"
-        android:visibility="invisible"
         android:background="@drawable/select_box_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

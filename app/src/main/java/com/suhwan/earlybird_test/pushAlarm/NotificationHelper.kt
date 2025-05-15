@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.suhwan.earlybird_test.R
+import com.suhwan.earlybird_test.ui.main.MainActivity
 
 class NotificationHelper(private val context: Context) {
     private var notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -29,7 +30,7 @@ class NotificationHelper(private val context: Context) {
     }
     fun deliverNotification() {
 
-        val intent = Intent(context, TestActivity::class.java).apply {
+        val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 

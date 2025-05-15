@@ -26,11 +26,11 @@
     <string name="add_sun">Sun</string>
 
     <!--reservation_activity-->
-    <string name="reservation_title">할 일 추가</string>
-    <string name="reservation_schedule_hint">할 일 입력은 9자까지</string>
-    <string name="reservation_alarm_sound">알람음</string>
+    <string name="reservation_text">언제 무엇을 함께 할래!?</string>
+    <string name="reservation_task">할 일</string>
     <string name="reservation_vibration">진동</string>
-    <string name="reservation_normal">기본</string>
+    <string name="reservation_button_next_time">다음에 할게</string>
+    <string name="reservation_button_finish">완료</string>
 
     <!--splash_activity-->
     <string name="splash_text_1"><font color='#4C4C4C'>With</font> EarlyBird<font color='#4C4C4C'>,</font></string>
