@@ -95,14 +95,6 @@ class ReservationActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.switchAlarmSound.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                binding.switchAlarmSound.trackTintList = ContextCompat.getColorStateList(this,R.color.sub_background)
-            }
-            else{
-                binding.switchAlarmSound.trackTintList = ContextCompat.getColorStateList(this,R.color.gray)
-            }
-        }
         binding.switchVibration.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
                 binding.switchVibration.trackTintList = ContextCompat.getColorStateList(this,R.color.sub_background)
