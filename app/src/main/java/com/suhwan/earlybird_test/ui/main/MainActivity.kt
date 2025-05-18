@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-//        AlarmUtil.scheduleDailyAlarm(this, 9, 0, "AM", true)
-//        AlarmUtil.scheduleDailyAlarm(this, 11, 0, "PM", true)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 

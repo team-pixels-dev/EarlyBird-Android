@@ -8,50 +8,64 @@ import android.os.Build
 import java.util.Calendar
 
 object AlarmUtil {
-     fun scheduleDailyAlarm(context: Context, Hour:Int, Minute:Int, Pa: String, vibration:Boolean){
-        var hour = Hour
-        val minute = Minute
-        val pa = Pa
-        if(pa =="PM" && hour != 12) hour += 12
-        if(pa =="AM" && hour == 12) hour = 0
+     fun scheduleDailyAlarm(
+         context: Context,
+         alarmType: AlarmType,
+         customHour: Int? = null,
+         customMinute: Int? = null,
+         customPa: String? = null,
+         customVibration: Boolean? = null
+     ) {
+         //기본 알람일 때랑 사용자가 알림을 보낼 때랑 alarmType을 입력받느냐에 따라서 달라짐
+         val hour = customHour ?: alarmType.defaultHour
+         val minute = customMinute ?: alarmType.defaultMinute
+         val pa = customPa ?: alarmType.pa
+         val vibration = customVibration ?: alarmType.vibration
 
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+         var hour24 = if (pa == "PM" && hour != 12) hour + 12 else if (pa == "AM" && hour == 12) 0 else hour
 
-        val intent = Intent(context, AlarmReceiver::class.java)
-         intent.putExtra("hour", Hour)
-         intent.putExtra("minute", Minute)
-         intent.putExtra("pa", Pa)
-         intent.putExtra("vibration", vibration)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            1001,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-        // 알람 설정
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, hour)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
+         val intent = Intent(context, AlarmReceiver::class.java).apply {
+             putExtra("hour", hour24)
+             putExtra("minute", minute)
+             putExtra("pa", pa)
+             putExtra("vibration", vibration)
+             putExtra("requestCode", alarmType.requestCode)
+         }
 
-            // 이미 지난 시간이면 내일로 설정
-            if (timeInMillis <= System.currentTimeMillis()) {
-                add(Calendar.DAY_OF_YEAR, 1)
-            }
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent //시간이 되었을 때 이게 실행되는거임
-            )
-        } else {
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-        }
-    }
+         val pendingIntent = PendingIntent.getBroadcast(
+             context,
+             alarmType.requestCode,
+             intent,
+             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+         )
+
+         // 알람 설정
+         val calendar = Calendar.getInstance().apply {
+             set(Calendar.HOUR_OF_DAY, hour24)
+             set(Calendar.MINUTE, minute)
+             set(Calendar.SECOND, 0)
+             set(Calendar.MILLISECOND, 0)
+
+             // 이미 지난 시간이면 내일로 설정
+             if (timeInMillis <= System.currentTimeMillis()) {
+                 add(Calendar.DAY_OF_YEAR, 1)
+             }
+         }
+
+         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+             alarmManager.setExactAndAllowWhileIdle(
+                 AlarmManager.RTC_WAKEUP,
+                 calendar.timeInMillis,
+                 pendingIntent //시간이 되었을 때 이게 실행되는거임
+             )
+         } else {
+             alarmManager.setExact(
+                 AlarmManager.RTC_WAKEUP,
+                 calendar.timeInMillis,
+                 pendingIntent
+             )
+         }
+     }
 }

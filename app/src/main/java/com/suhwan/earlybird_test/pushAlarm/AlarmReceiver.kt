@@ -12,15 +12,19 @@ class AlarmReceiver : BroadcastReceiver() {
         val minute : Int = intent.getIntExtra("minute", 0)
         val pa : String  = intent.getStringExtra("pa") ?: "AM"
         val vibration : Boolean = intent.getBooleanExtra("vibration", false)
+        val requestCode : Int = intent.getIntExtra("requestCode", -1)
 
-        Log.d("receiver", "$hour 시 $minute 분 $pa")
         val helper = context.let { NotificationHelper(it) }
-        if(vibration){
-            helper.deliverDefaultNotification()
-        }
-        else{
+        if(requestCode == AlarmType.USER_REQUEST_CODE){
             helper.deliverCustomNotification()
         }
-        AlarmUtil.scheduleDailyAlarm(context, hour,minute,pa, vibration)
+        else{
+            helper.deliverDefaultNotification()
+        }
+
+        val alarmType = AlarmType.fromRequestCode(requestCode)
+        if (alarmType != null) {
+            AlarmUtil.scheduleDailyAlarm(context, alarmType, hour, minute,pa, vibration)
+        }
     }
 }

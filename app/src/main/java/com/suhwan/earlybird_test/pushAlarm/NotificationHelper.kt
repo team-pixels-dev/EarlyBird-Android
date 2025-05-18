@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.ui.main.MainActivity
+import com.suhwan.earlybird_test.ui.timer.TimerActivity
 import java.util.Calendar
 
 class NotificationHelper(private val context: Context) {
@@ -47,27 +48,31 @@ class NotificationHelper(private val context: Context) {
         }
     }
     fun deliverDefaultNotification() {
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
         sendNotification(
             title = "얼리버드 알림",
             text = "지금은 정기 알림 시간입니다.",
             channelId = CHANNEL_ID_DEFAULT,
-            notificationId = NOTIFICATION_ID_DEFAULT
+            notificationId = NOTIFICATION_ID_DEFAULT,
+            intent
         )
     }
 
     fun deliverCustomNotification() {
+        val intent = Intent(context, TimerActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
         sendNotification(
             title = "사용자 알림",
             text = "사용자 설정 시간 알림입니다.",
             channelId = CHANNEL_ID_CUSTOM,
-            notificationId = NOTIFICATION_ID_CUSTOM
+            notificationId = NOTIFICATION_ID_CUSTOM,
+            intent
         )
     }
-    private fun sendNotification(title: String, text: String, channelId: String, notificationId: Int) {
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-
+    private fun sendNotification(title: String, text: String, channelId: String, notificationId: Int, intent: Intent) {
         val pendingIntent = PendingIntent.getActivity(
             context,
             notificationId,
