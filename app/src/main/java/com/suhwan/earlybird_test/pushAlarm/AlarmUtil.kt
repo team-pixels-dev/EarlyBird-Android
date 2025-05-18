@@ -2,39 +2,33 @@ package com.suhwan.earlybird_test.pushAlarm
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.Bundle
-import android.widget.Button
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.suhwan.earlybird_test.R
 import java.util.Calendar
 
-class TestActivity : AppCompatActivity() {
+object AlarmUtil {
+     fun scheduleDailyAlarm(context: Context, Hour:Int, Minute:Int, Pa: String, vibration:Boolean){
+        var hour = Hour
+        val minute = Minute
+        val pa = Pa
+        if(pa =="PM" && hour != 12) hour += 12
+        if(pa =="AM" && hour == 12) hour = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
-
-        NotificationHelper(this)
-
-        showTimePicker()
-    }
-    fun setDailyAlarm(context: Context, hour: Int, minute: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val intent = Intent(context, AlarmReceiver::class.java)
+         intent.putExtra("hour", Hour)
+         intent.putExtra("minute", Minute)
+         intent.putExtra("pa", Pa)
+         intent.putExtra("vibration", vibration)
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             1001,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-
-        // 매일 오전 9시 설정
+        // 알람 설정
         val calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, hour)
             set(Calendar.MINUTE, minute)
@@ -59,15 +53,5 @@ class TestActivity : AppCompatActivity() {
                 pendingIntent
             )
         }
-    }
-    private fun showTimePicker() {
-        val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-            setDailyAlarm(this, selectedHour, selectedMinute)
-            Toast.makeText(this, "$selectedHour 시 $selectedMinute 분에 알림 예약됨!", Toast.LENGTH_SHORT).show()
-        }, hour, minute, true).show()
     }
 }

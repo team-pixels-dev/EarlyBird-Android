@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityMainBinding
 import com.suhwan.earlybird_test.db.ClientManager
+import com.suhwan.earlybird_test.pushAlarm.AlarmUtil
 import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
 import com.suhwan.earlybird_test.ui.nps.NpsCommentDialogFragment
 import com.suhwan.earlybird_test.ui.nps.NpsScoreDialogFragment
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var handler: Handler?= null
     }
-
     private lateinit var binding: ActivityMainBinding
     val btn_listener = View.OnClickListener { view ->
         val intent = when(view.id){
@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+//        AlarmUtil.scheduleDailyAlarm(this, 9, 0, "AM", true)
+//        AlarmUtil.scheduleDailyAlarm(this, 11, 0, "PM", true)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         binding.button1.setOnClickListener(btn_listener)

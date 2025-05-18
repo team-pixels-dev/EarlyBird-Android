@@ -21,6 +21,7 @@ import com.suhwan.earlybird_test.db.alarm.Alarm
 import com.suhwan.earlybird_test.db.alarm.AlarmDao
 import com.suhwan.earlybird_test.db.alarm.AlarmDatabase
 import com.suhwan.earlybird_test.pushAlarm.AlarmReceiver
+import com.suhwan.earlybird_test.pushAlarm.AlarmUtil
 import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
 import com.suhwan.earlybird_test.ui.main.MainActivity
 import java.util.Calendar
@@ -86,9 +87,11 @@ class ReservationActivity : AppCompatActivity() {
         ))
 
         binding.btnFinish.setOnClickListener {
-            insertAlarm(this)
+            val vibration = binding.switchVibration.isChecked
+            AlarmUtil.scheduleDailyAlarm(this, Hour.toInt(), Minute.toInt(), Pa, vibration)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.btnBack.setOnClickListener{
@@ -110,72 +113,6 @@ class ReservationActivity : AppCompatActivity() {
             insets
         }
     }
-
-    private fun insertAlarm(context: Context){
-        var hour = Hour.toInt()
-        val minute = Minute.toInt()
-        val pa = Pa
-        if(pa =="PM") hour += 12
-        val vibration = binding.switchVibration.isChecked
-
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        val intent = Intent(context, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            1001,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // 알람 설정
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, hour)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-
-            // 이미 지난 시간이면 내일로 설정
-            if (timeInMillis <= System.currentTimeMillis()) {
-                add(Calendar.DAY_OF_YEAR, 1)
-            }
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent //시간이 되었을 때 이게 실행되는거임
-            )
-        } else {
-            alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-        }
-
-        //옛날에 데이터 베이스 활용해서 저장하던 코드
-        /*val todo = binding.todoInput.text.toString()
-        val hour = Hour.toInt()
-        val minute = Minute.toInt()
-        val pa = Pa
-        val sound = binding.switchAlarmSound.isChecked
-        val vibration = binding.switchVibration.isChecked
-        if(todo.isEmpty()){
-            Toast.makeText(this, "모든 항목을 채워주세요.",Toast.LENGTH_SHORT).show()
-        }else{
-            Thread{
-                alarmDao.insert(Alarm(null, todo, hour, minute, pa, sound, vibration))
-                runOnUiThread{
-                    Toast.makeText(this, "알람이 추가되었습니다.", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-            }.start()
-            intent = Intent(this, AddAlarmActivity::class.java)
-            startActivity(intent)
-        }*/
-    }
-
     private fun getCenterItem(snapHelper : LinearSnapHelper, layoutManager: LinearLayoutManager, adapter: WheelPickerAdapter, select: Int) : RecyclerView.OnScrollListener {
         return object : RecyclerView.OnScrollListener(){
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -197,4 +134,69 @@ class ReservationActivity : AppCompatActivity() {
             }
         }
     }
+//    private fun insertAlarm(context: Context){
+//        var hour = Hour.toInt()
+//        val minute = Minute.toInt()
+//        val pa = Pa
+//        if(pa =="PM" && hour != 12) hour += 12
+//        if(pa =="AM" && hour == 12) hour = 0
+//        val vibration = binding.switchVibration.isChecked
+//
+//        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//
+//        val intent = Intent(context, AlarmReceiver::class.java)
+//        intent.putExtra("vibration", vibration)
+//        val pendingIntent = PendingIntent.getBroadcast(
+//            context,
+//            1001,
+//            intent,
+//            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+//        )
+//        // 알람 설정
+//        val calendar = Calendar.getInstance().apply {
+//            set(Calendar.HOUR_OF_DAY, hour)
+//            set(Calendar.MINUTE, minute)
+//            set(Calendar.SECOND, 0)
+//            set(Calendar.MILLISECOND, 0)
+//
+//            // 이미 지난 시간이면 내일로 설정
+//            if (timeInMillis <= System.currentTimeMillis()) {
+//                add(Calendar.DAY_OF_YEAR, 1)
+//            }
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(
+//                AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent //시간이 되었을 때 이게 실행되는거임
+//            )
+//        } else {
+//            alarmManager.setExact(
+//                AlarmManager.RTC_WAKEUP,
+//                calendar.timeInMillis,
+//                pendingIntent
+//            )
+//        }
+//
+//        //옛날에 데이터 베이스 활용해서 저장하던 코드
+//        /*val todo = binding.todoInput.text.toString()
+//        val hour = Hour.toInt()
+//        val minute = Minute.toInt()
+//        val pa = Pa
+//        val sound = binding.switchAlarmSound.isChecked
+//        val vibration = binding.switchVibration.isChecked
+//        if(todo.isEmpty()){
+//            Toast.makeText(this, "모든 항목을 채워주세요.",Toast.LENGTH_SHORT).show()
+//        }else{
+//            Thread{
+//                alarmDao.insert(Alarm(null, todo, hour, minute, pa, sound, vibration))
+//                runOnUiThread{
+//                    Toast.makeText(this, "알람이 추가되었습니다.", Toast.LENGTH_SHORT).show()
+//                    finish()
+//                }
+//            }.start()
+//            intent = Intent(this, AddAlarmActivity::class.java)
+//            startActivity(intent)
+//        }*/
+//    }
 }

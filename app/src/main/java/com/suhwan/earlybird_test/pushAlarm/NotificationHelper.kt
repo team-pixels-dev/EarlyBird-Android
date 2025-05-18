@@ -1,5 +1,6 @@
 package com.suhwan.earlybird_test.pushAlarm
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.ui.main.MainActivity
+import java.util.Calendar
 
 class NotificationHelper(private val context: Context) {
     private var notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -19,42 +21,78 @@ class NotificationHelper(private val context: Context) {
     }
 
     private fun createNotificationChannel() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // 기본 알림 채널
+            val defaultChannel = NotificationChannel(
+                CHANNEL_ID_DEFAULT,
+                CHANNEL_NAME_DEFAULT,
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "정기 알림"
+                enableVibration(true)
+            }
 
+            // 사용자 지정 알림 채널
+            val customChannel = NotificationChannel(
+                CHANNEL_ID_CUSTOM,
+                CHANNEL_NAME_CUSTOM,
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "사용자가 알림"
+                enableVibration(false)
+            }
+
+            notificationManager.createNotificationChannel(defaultChannel)
+            notificationManager.createNotificationChannel(customChannel)
         }
-        val notificationChannel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
-        notificationChannel.enableVibration(true)
-        notificationChannel.description = "description"
-
-        notificationManager.createNotificationChannel(notificationChannel)
     }
-    fun deliverNotification() {
+    fun deliverDefaultNotification() {
+        sendNotification(
+            title = "얼리버드 알림",
+            text = "지금은 정기 알림 시간입니다.",
+            channelId = CHANNEL_ID_DEFAULT,
+            notificationId = NOTIFICATION_ID_DEFAULT
+        )
+    }
 
+    fun deliverCustomNotification() {
+        sendNotification(
+            title = "사용자 알림",
+            text = "사용자 설정 시간 알림입니다.",
+            channelId = CHANNEL_ID_CUSTOM,
+            notificationId = NOTIFICATION_ID_CUSTOM
+        )
+    }
+    private fun sendNotification(title: String, text: String, channelId: String, notificationId: Int) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
         val pendingIntent = PendingIntent.getActivity(
             context,
-            NOTIFICATION_ID, //request Code
+            notificationId,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.icon_timer_character_3)
-            .setContentTitle("얼리버드")
-            .setContentText("시작할 시간입니다")
-            .setContentIntent(pendingIntent) //push 알림을 클릭했을 때 실행되는 activity
+            .setContentTitle(title)
+            .setContentText(text)
+            .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
 
-        notificationManager.notify(NOTIFICATION_ID, builder.build())
+        notificationManager.notify(notificationId, builder.build())
     }
-
     companion object {
-        const val CHANNEL_ID = "default_channel"
-        const val CHANNEL_NAME = "고정 알림"
-        const val NOTIFICATION_ID = 0
+        const val CHANNEL_ID_DEFAULT = "default_channel"
+        const val CHANNEL_NAME_DEFAULT = "고정 알림"
+
+        const val CHANNEL_ID_CUSTOM = "custom_channel" //진동이 없는 채널
+        const val CHANNEL_NAME_CUSTOM = "사용자 지정 알림"
+
+        const val NOTIFICATION_ID_DEFAULT = 100
+        const val NOTIFICATION_ID_CUSTOM = 200
     }
 }

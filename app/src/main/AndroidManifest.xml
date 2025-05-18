@@ -23,10 +23,6 @@
         android:theme="@style/Theme.EarlyBird_Test"
         tools:targetApi="31">
         <activity
-            android:name=".pushAlarm.TestActivity"
-            android:exported="true">
-        </activity>
-        <activity
             android:name=".ui.splash.SplashPageActivity"
             android:exported="true">
             <intent-filter>
