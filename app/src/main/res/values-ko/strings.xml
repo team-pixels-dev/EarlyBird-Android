@@ -4,7 +4,7 @@
     <!--main_activity-->
     <string name="main_introduction">나는\n<b>할 일을 미루지 않는</b>\n사람이다</string>
     <string name="main_title_1">지금 2분 집중 시작</string>
-    <string name="main_title_1_introduction_1">자과감 방지 가능 스트레스 감소</string>
+    <string name="main_title_1_introduction_1">자괴감 방지 가능 스트레스 감소</string>
     <!--    <string name="main_title_1_introduction_2">스트레스 감소</string>-->
     <string name="main_title_2">할 일 추가하고 알림받기</string>
     <string name="main_title_2_introduction_1">좋은 성적받기 가능</string>
