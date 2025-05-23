@@ -13,21 +13,22 @@ import androidx.core.view.WindowInsetsCompat
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityMainBinding
 import com.suhwan.earlybird_test.db.ClientManager
+import com.suhwan.earlybird_test.pushAlarm.AlarmUtil
 import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
 import com.suhwan.earlybird_test.ui.nps.NpsCommentDialogFragment
 import com.suhwan.earlybird_test.ui.nps.NpsScoreDialogFragment
+import com.suhwan.earlybird_test.ui.reservation.ReservationActivity
 import com.suhwan.earlybird_test.ui.timer.TimerActivity
 
 class MainActivity : AppCompatActivity() {
     companion object {
         var handler: Handler?= null
     }
-
     private lateinit var binding: ActivityMainBinding
     val btn_listener = View.OnClickListener { view ->
         val intent = when(view.id){
             binding.button1.id -> Intent(this, TimerActivity::class.java)
-            binding.button2.id -> Intent(this, AddAlarmActivity::class.java)
+            binding.button2.id -> Intent(this, ReservationActivity::class.java)
             else -> null
         }
         intent?.let { startActivity(intent) }
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         binding.button1.setOnClickListener(btn_listener)
