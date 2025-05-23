@@ -36,6 +36,8 @@ class TimerActivity : AppCompatActivity() {
         binding = ActivityTimerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val simulateClick = intent.getBooleanExtra("simulateClick", false)
+
         binding.btnStart.setOnClickListener {
             if(binding.btnStart.text == getString(R.string.timer_btn_start)){
                 checkPermission()
@@ -46,6 +48,11 @@ class TimerActivity : AppCompatActivity() {
                 intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+        }
+
+        if (simulateClick) {
+            //사용자 예약시간 전화 받았을 때
+            binding.btnStart.performClick()
         }
     }
 

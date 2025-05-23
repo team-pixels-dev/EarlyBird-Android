@@ -24,7 +24,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val alarmType = AlarmType.fromRequestCode(requestCode)
         if (alarmType != null) {
-            AlarmUtil.scheduleDailyAlarm(context, alarmType, hour, minute,pa, vibration)
+            AlarmUtil.scheduleDailyAlarm(context, alarmType, hour, minute, pa, vibration)
         }
     }
 }
