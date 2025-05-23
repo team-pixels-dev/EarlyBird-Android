@@ -27,7 +27,7 @@ class AlarmReceiver : BroadcastReceiver() {
             val wakeLock = powerManager.newWakeLock(
                         PowerManager.SCREEN_BRIGHT_WAKE_LOCK or
                                 PowerManager.ACQUIRE_CAUSES_WAKEUP,
-                "MyApp::MyWakelockTag"
+                "EarlyBird::TimerWakeLock"
             )
             val callIntent = Intent(context, CallActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or
