@@ -1,11 +1,15 @@
 package com.suhwan.earlybird_test.ui.main
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -36,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        checkPermission()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -78,6 +84,31 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true // 메시지가 정상적으로 처리됨을 나타냄
+        }
+    }
+    //다른 앱위에 그릴 수 있는 권한을 받아온다. -> 여기서는 예약시간에 전화 화면을 띄우기 위해서 사용한다.
+    fun checkPermission() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(!Settings.canDrawOverlays(this)) {
+                val uri = Uri.fromParts("package", packageName, null)
+                val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri)
+                startActivityForResult(intent, 0)
+            } else {
+//                val intent = Intent(applicationContext, LockScreenService::class.java)
+//                startForegroundService(intent)
+            }
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 0) {
+            if(!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "권한을 허용해주세요", Toast.LENGTH_LONG).show()
+                checkPermission()
+            } else {
+//                val intent = Intent(applicationContext, LockScreenService::class.java)
+//                startForegroundService(intent)
+            }
         }
     }
 }

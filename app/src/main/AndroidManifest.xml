@@ -4,11 +4,12 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
@@ -22,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EarlyBird_Test"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.call.CallActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.splash.SplashPageActivity"
             android:exported="true">
