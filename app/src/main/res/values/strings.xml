@@ -2,13 +2,12 @@
     <string name="app_name">얼리버드</string>
 
     <!--main_activity-->
-    <string name="main_introduction">I am a person\n<b>who gets things done</b>\non time</string>
-    <string name="main_title_1">Get started now!</string>
-    <string name="main_title_1_introduction_1">Helps avoid feelings of self-blame\nReduces stress</string>
-    <!--    <string name="main_title_1_introduction_2">스트레스 감소</string>-->
-    <string name="main_title_2">할 일 추가하고 알림받기</string>
-    <string name="main_title_2_introduction_1">좋은 성적받기 가능</string>
-    <string name="main_title_2_introduction_2">지각 스트레스 해방</string>
+    <string name="main_introduction">나는 할 일을 미루지 않는 사람이 될거야!</string>
+    <string name="main_character_ment_1">나도 마찬가지야!</string>
+    <string name="main_character_ment_2">근데 말로만 그러긴 싫어!!</string>
+    <string name="main_box_title">얼리버드와 함께 해요!</string>
+    <string name="main_title_1">원하는 시간에 시작하기</string>
+    <string name="main_title_2">지금 당장 시작하기</string>
 
     <!--timer_activity-->
     <string name="timer_btn_start">Start!</string>

@@ -5,6 +5,7 @@
     <color name="gray">#8D8D8D</color>
     <color name="scroll_gray">#D3D3D3</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
     <color name="reservation_background">#F7F7F7</color>
     <color name="reservation_button_gray">#DBDBDB</color>
     <color name="calendar_header">#E5E5E5</color>
