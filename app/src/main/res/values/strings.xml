@@ -1,19 +1,18 @@
 <resources>
-    <string name="app_name">EarlyBird_Test</string>
+    <string name="app_name">얼리버드</string>
 
     <!--main_activity-->
-    <string name="main_introduction">나는\n할 일을 미루지 않는\n사람이다</string>
-    <string name="main_title_1">지금 당장 시작하기</string>
-    <string name="main_title_1_introduction_1">자과감 방지 가능</string>
-    <string name="main_title_1_introduction_2">스트레스 감소</string>
-    <string name="main_title_2">할 일 추가하고 알림받기</string>
-    <string name="main_title_2_introduction_1">좋은 성적받기 가능</string>
-    <string name="main_title_2_introduction_2">지각 스트레스 해방</string>
+    <string name="main_introduction">나는 할 일을 미루지 않는 사람이 될거야!</string>
+    <string name="main_character_ment_1">나도 마찬가지야!</string>
+    <string name="main_character_ment_2">근데 말로만 그러긴 싫어!!</string>
+    <string name="main_box_title">얼리버드와 함께 해요!</string>
+    <string name="main_title_1">원하는 시간에 시작하기</string>
+    <string name="main_title_2">지금 당장 시작하기</string>
 
     <!--timer_activity-->
-    <string name="timer_btn_start">시작!</string>
-    <string name="timer_btn_end">완료</string>
-    <string name="timer_finish_good">얼리버드와 함께라면\n혼자선 어려운 일도\n쉽게 시작할 수 있어요!</string>
+    <string name="timer_btn_start">Start!</string>
+    <string name="timer_btn_end">Task completed!</string>
+    <string name="timer_finish_good">With EarlyBird,\ngetting started is easy!</string>
 
     <!--addAlarm_activity-->
     <string name="add_non_added_ment">나중에 할 일 추가하고 알림 받기</string>
@@ -25,11 +24,34 @@
     <string name="add_sat">Sat</string>
     <string name="add_sun">Sun</string>
 
-<!--reservation_activity-->
-    <string name="reservation_title">할 일 추가</string>
-    <string name="reservation_schedule_hint">할 일 입력은 9자까지</string>
-    <string name="reservation_alarm_sound">알람음</string>
+    <!--reservation_activity-->
+    <string name="reservation_text">언제 무엇을 함께 할래!?</string>
+    <string name="reservation_task">할 일</string>
     <string name="reservation_vibration">진동</string>
-    <string name="reservation_normal">기본</string>
+    <string name="reservation_button_next_time">다음에 할게</string>
+    <string name="reservation_button_finish">완료</string>
+
+    <!--splash_activity-->
+    <string name="splash_text_1"><font color='#4C4C4C'>With</font> EarlyBird<font color='#4C4C4C'>,</font></string>
+    <string name="splash_text_2">getting started is easy</string>
+
+    <!--nps_score_fragment-->
+    <string name="nps_question">How likely to\nrecommend EarlyBird?</string>
+    <string name="nps_no_recommend">Wouldn\'t recommend</string>
+    <string name="nps_yes_recommend">Highly recommend</string>
+    <string name="nps_submit">Submit</string>
+    <string name="nps_think">사용하면서 아쉬웠던 점이 있다면 적어주세요</string>
+    <string name="nps_finish">완료하기</string>
+
+    <!--nps_comment_fragment-->
+    <string name="nps_comment_hint">Please leave your feedback on the service in 300 characters or less.</string>
+
+    <!--nps_pay_fragment-->
+    <string name="nps_pay_question">Would you be willing to\nsubscribe to EarlyBird for\n<b>$1.90~$5.90</b> per month?</string>
+    <string name="nps_pay_comment">We\'d love to know if you\'d subscribe\nbased on the current feature alone!</string>
+    <string name="nps_pay_yes">Yes, I\'d be willing to subscribe!</string>
+    <string name="nps_pay_middle">I need more features.</string>
+    <string name="nps_pay_no">No, I\'m good.</string>
+
 
 </resources>

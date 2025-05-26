@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">얼리버드</string>
+
+    <!--main_activity-->
+    <string name="main_introduction">나는 할 일을 미루지 않는 사람이 될거야!</string>
+    <string name="main_character_ment_1">나도 마찬가지야!</string>
+    <string name="main_character_ment_2">근데 말로만 그러긴 싫어!!</string>
+    <string name="main_box_title">얼리버드와 함께 해요!</string>
+    <string name="main_title_1">원하는 시간에 시작하기 ></string>
+    <string name="main_title_2">지금 당장 시작하기 ></string>
+
+    <!--timer_activity-->
+    <string name="timer_btn_start">시작!</string>
+    <string name="timer_btn_end">완료</string>
+    <string name="timer_finish_good">얼리버드와 함께라면\n혼자선 어려운 일도\n쉽게 시작할 수 있어요!</string>
+
+    <!--addAlarm_activity-->
+    <string name="add_non_added_ment">나중에 할 일 추가하고 알림 받기</string>
+    <string name="add_mon">Mon</string>
+    <string name="add_tue">Tue</string>
+    <string name="add_wed">Wed</string>
+    <string name="add_tur">Tur</string>
+    <string name="add_fri">Fri</string>
+    <string name="add_sat">Sat</string>
+    <string name="add_sun">Sun</string>
+
+    <!--reservation_activity-->
+    <string name="reservation_text">언제 무엇을 함께 할래!?</string>
+    <string name="reservation_task">할 일</string>
+    <string name="reservation_vibration">진동</string>
+    <string name="reservation_button_next_time">다음에 할게</string>
+    <string name="reservation_button_finish">완료</string>
+
+    <!--splash_activity-->
+    <string name="splash_text_1">얼리버드<font color='#4C4C4C'>와 함께라면</font></string>
+    <string name="splash_text_2">시작이 어렵지 않아요</string>
+
+    <!--nps_score_fragment-->
+    <string name="nps_question">얼리버드를 주변에 얼마나\n추천하고 싶으신가요?</string>
+    <string name="nps_no_recommend">추천 안해요</string>
+    <string name="nps_yes_recommend">정말 추천해요</string>
+    <string name="nps_submit">제출하기</string>
+    <string name="nps_think">사용하면서 아쉬웠던 점이 있다면 적어주세요</string>
+    <string name="nps_finish">완료하기</string>
+
+    <!--nps_comment_fragment-->
+    <string name="nps_comment_hint">서비스에 대한 피드백을 300자 이내로 작성해주세요.</string>
+
+    <!--nps_pay_fragment-->
+    <string name="nps_pay_question">얼리버드를 월 1,900~5,900원으로\n결제해서 사용할 의향이 있으신가요?</string>
+    <string name="nps_pay_comment">현재 기능 만으로 구독 결제를 하실지 궁금해요!\n솔직한 의견을 알려주세요!</string>
+    <string name="nps_pay_yes">네, 결제할 의향이 있어요!</string>
+    <string name="nps_pay_middle">더 많은 기능이 필요해요</string>
+    <string name="nps_pay_no">아니요, 괜찮아요</string>
+
+
+</resources>

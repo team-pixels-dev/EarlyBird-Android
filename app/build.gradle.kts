@@ -11,16 +11,16 @@ android {
     defaultConfig {
         applicationId = "com.suhwan.earlybird_test"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
+        targetSdk = 35
+        versionCode = 5
+        versionName = "1.0.5"
+        resConfigs("ko")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -52,4 +52,7 @@ dependencies {
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation("androidx.core:core-ktx:1.16.0")
 }

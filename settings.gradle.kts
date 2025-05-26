@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "EarlyBird_Test"
+rootProject.name = "EarlyBird-Android"
 include(":app")
  

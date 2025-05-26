@@ -5,12 +5,19 @@
     <color name="gray">#8D8D8D</color>
     <color name="scroll_gray">#D3D3D3</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="reservation_background">#F7F7F7</color>
+    <color name="reservation_button_gray">#DBDBDB</color>
     <color name="calendar_header">#E5E5E5</color>
     <color name="calendar_body_gray">#BDBDBD</color>
+    <color name="submit_pop_up">#B3B3B3</color>
 
-    <color name="background">#80DBF0</color>
+    <color name="reservation_circle">#FFDE7B</color>
+    <color name="main_background">#00A2CB</color>
     <color name="sub_background">#36CAF0</color>
     <color name="Emphasis_background">#E5E5E5</color>
     <color name="shadow">#2F2460</color>
     <color name="timer_start_text">#FF6666</color>
+    <color name="nps_btn_circle">#F7F7F7</color>
+
 </resources>

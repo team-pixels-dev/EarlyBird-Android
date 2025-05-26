@@ -1,8 +1,12 @@
 package com.suhwan.earlybird_test.ui.reservation
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,31 +18,36 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.suhwan.earlybird_test.R
 import com.suhwan.earlybird_test.databinding.ActivityReservationBinding
-import com.suhwan.earlybird_test.db.Alarm
-import com.suhwan.earlybird_test.db.AlarmDao
-import com.suhwan.earlybird_test.db.AlarmDatabase
+import com.suhwan.earlybird_test.db.alarm.Alarm
+import com.suhwan.earlybird_test.db.alarm.AlarmDao
+import com.suhwan.earlybird_test.db.alarm.AlarmDatabase
+import com.suhwan.earlybird_test.pushAlarm.AlarmReceiver
+import com.suhwan.earlybird_test.pushAlarm.AlarmType
+import com.suhwan.earlybird_test.pushAlarm.AlarmUtil
 import com.suhwan.earlybird_test.ui.add.AddAlarmActivity
+import com.suhwan.earlybird_test.ui.main.MainActivity
+import java.util.Calendar
 
 class ReservationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReservationBinding
     lateinit var db: AlarmDatabase
-    lateinit var alarmDao: AlarmDao
     private var Hour : String = "00"
     private var Minute : String = "00"
     private var Pa : String = "AM"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityReservationBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        db = AlarmDatabase.getDatabase(this)
-        alarmDao = db.getAlarmDao()
+        AlarmUtil.scheduleDailyAlarm(this, AlarmType.MORNING)
+        AlarmUtil.scheduleDailyAlarm(this, AlarmType.NIGHT)
 
         val HourData = mutableListOf<String>("")
         val MinuteData = mutableListOf<String>("")
         val PaData = mutableListOf<String>("","AM","PM","")
-        for(i in 0..23){
+        for(i in 0..12){
             if (i<10) HourData.add("0$i") else HourData.add("$i")
         }
         for(i in 0..59){
@@ -59,6 +68,7 @@ class ReservationActivity : AppCompatActivity() {
         val snapHelperHour = LinearSnapHelper()
         val snapHelperMinute = LinearSnapHelper()
         val snapHelperPa = LinearSnapHelper()
+
         snapHelperHour.attachToRecyclerView(binding.wheelPickerHour)
         snapHelperMinute.attachToRecyclerView(binding.wheelPickerMinute)
         snapHelperPa.attachToRecyclerView(binding.wheelPickerPa)
@@ -79,23 +89,27 @@ class ReservationActivity : AppCompatActivity() {
             3
         ))
 
-        binding.btnSave.setOnClickListener {
-            insertAlarm()
+        binding.btnFinish.setOnClickListener {
+            val vibration = binding.switchVibration.isChecked
+
+            AlarmUtil.scheduleDailyAlarm(
+                this,
+                AlarmType.USER,
+                customHour = Hour.toInt(),
+                customMinute = Minute.toInt(),
+                customPa = Pa,
+                customVibration = vibration
+            )
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         binding.btnBack.setOnClickListener{
-            intent = Intent(this, AddAlarmActivity::class.java)
-            startActivity(intent)
+            finish()
         }
-        
-        binding.switchAlarmSound.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                binding.switchAlarmSound.trackTintList = ContextCompat.getColorStateList(this,R.color.sub_background)
-            }
-            else{
-                binding.switchAlarmSound.trackTintList = ContextCompat.getColorStateList(this,R.color.gray)
-            }
-        }
+
         binding.switchVibration.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
                 binding.switchVibration.trackTintList = ContextCompat.getColorStateList(this,R.color.sub_background)
@@ -104,35 +118,13 @@ class ReservationActivity : AppCompatActivity() {
                 binding.switchVibration.trackTintList = ContextCompat.getColorStateList(this,R.color.gray)
             }
         }
-        
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
     }
-    private fun insertAlarm(){
-        val todo = binding.todoInput.text.toString()
-        val hour = Hour.toInt()
-        val minute = Minute.toInt()
-        val pa = Pa
-        val sound = binding.switchAlarmSound.isChecked
-        val vibration = binding.switchVibration.isChecked
-        if(todo.isEmpty()){
-            Toast.makeText(this, "모든 항목을 채워주세요.",Toast.LENGTH_SHORT).show()
-        }else{
-            Thread{
-                alarmDao.insert(Alarm(null, todo, hour, minute, pa, sound, vibration))
-                runOnUiThread{
-                    Toast.makeText(this, "알람이 추가되었습니다.", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-            }.start()
-            intent = Intent(this, AddAlarmActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
     private fun getCenterItem(snapHelper : LinearSnapHelper, layoutManager: LinearLayoutManager, adapter: WheelPickerAdapter, select: Int) : RecyclerView.OnScrollListener {
         return object : RecyclerView.OnScrollListener(){
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
