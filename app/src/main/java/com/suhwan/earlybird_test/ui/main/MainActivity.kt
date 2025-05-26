@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val btn_listener = View.OnClickListener { view ->
         val intent = when(view.id){
-            binding.button1.id -> Intent(this, TimerActivity::class.java)
-            binding.button2.id -> Intent(this, ReservationActivity::class.java)
+            binding.box1.id -> Intent(this, TimerActivity::class.java)
+            binding.box2.id -> Intent(this, ReservationActivity::class.java)
             else -> null
         }
         intent?.let { startActivity(intent) }
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        binding.button1.setOnClickListener(btn_listener)
-        binding.button2.setOnClickListener(btn_listener)
+        binding.box1.setOnClickListener(btn_listener)
+        binding.box2.setOnClickListener(btn_listener)
 
         npsFragmentShow()
 
